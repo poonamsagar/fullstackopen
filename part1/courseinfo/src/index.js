@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Hello from './myLearning/personalStudy';
+import PageRender from './myLearning/pageRerendering';
 
 const Header = (props) => {
     console.log('from header', props)
@@ -31,6 +33,7 @@ const Total = (props) => {
 
     )
 }
+
 const App = () => {
     const course = {
         name: 'Half Stack application development',
@@ -55,8 +58,12 @@ const App = () => {
             <Header course={course.name} />
             <Content parts={course.parts} />
             <Total parts={course.parts} />
+            <Hello name="Poonam" age="28" gender="female" />
+            <PageRender></PageRender>
+
         </div>
     )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
+//setInterval takes two argument, 1. callback method, 2. Time delay
