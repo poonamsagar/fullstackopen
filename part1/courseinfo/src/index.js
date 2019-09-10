@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Hello from './myLearning/personalStudy';
 import PageRender from './myLearning/pageRerendering';
+import ComplexState from './myLearning/ComplexState';
 
 const Header = (props) => {
     console.log('from header', props)
@@ -60,6 +61,7 @@ const App = () => {
             <Total parts={course.parts} />
             <Hello name="Poonam" age="28" gender="female" />
             <PageRender></PageRender>
+            <ComplexState></ComplexState>
 
         </div>
     )
