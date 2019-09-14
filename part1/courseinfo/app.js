@@ -100,12 +100,12 @@ console.log(myArray.map(square))
 console.log(myArray.map(double));
 console.log(myArray);*/
 //new object property creation
-const newObj = {
-    name: 'poonam'
-}
+// const newObj = {
+//     name: 'poonam'
+// }
 //newObj.name
-newObj.age = '25';
-newObj['Gender'] = 'female';
+// newObj.age = '25';
+// newObj['Gender'] = 'female';
 //console.log(newObj);
 // const arto = {
 //     name: 'Arto Hellas',
@@ -131,17 +131,38 @@ newObj['Gender'] = 'female';
 // setTimeout(arto.greet.bind(arto), 1000)
 
 //classes
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-    greet() {
-        console.log('Namaste', this.name);
-    }
-}
-const poonam = new Person('Poonam', 1);
-poonam.greet();
+// class Person {
+//     constructor(name, age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+//     greet() {
+//         console.log('Namaste', this.name);
+//     }
+// }
+// const poonam = new Person('Poonam', 1);
+// poonam.greet,();
 
-const pankaj = new Person('Panakj', 5);
-pankaj.greet();
+// const pankaj = new Person('Panakj', 5);
+// pankaj.greet();
+
+poonamArray = ['wow', () => console.log('I am a method'), { a: 1, b: 2 }, 'done'];
+// const firstElement = poonamArray[0];
+// const secondElement = poonamArray[1];
+// const thirdElement = poonamArray[2];
+// const FourthElement = poonamArray[3];
+
+// const [firstElement, secondElement, thirdElement, fourthElement] = poonamArray;
+// //console.log(secondElement());
+// //const newArray = poonamArray;
+// const newArray = [...poonamArray];
+// newArray.push('newVale');
+// newArray[1] = 'I am string now';
+
+
+// console.log('new Array', newArray)
+// console.log('originl array', poonamArray)
+const obj = { a: 'hello', b: 'bye' };
+const newObj = { ...obj, a: 'changeValue' }
+//console.log(obj);
+console.log(newObj)

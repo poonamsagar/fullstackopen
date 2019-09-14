@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 
 
 const ComplexState = (props) => {
-    // const [left, setLeft] = useState(0)
+    // const [left, setLeft] = useState(0)// returns [state //=0,setState]
     // const [right, setRight] = useState(0)
 
-    const [clicks, setClicks] = useState({ left: 0, right: 0 })
+    const [clicks, setClicks] = useState({ left: 0, right: 0 }) //returns an array [state//defaultValue is { left: 0, right: 0 } ,setState]
     const handleLeftClick = () => {
-        const newClick = { left: clicks.left + 1, right: clicks.right }
-        setClicks(newClick)
+
+        setClicks({ ...clicks, left: clicks.left + 1 })
     }
 
     const handleRightClick = () => {
-        const newClick = { left: clicks.left, right: clicks.right + 1 }
-        setClicks(newClick)
+
+        setClicks({ ...clicks, right: clicks.right + 1 })
     }
 
     return (
