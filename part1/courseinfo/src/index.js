@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Hello from './myLearning/personalStudy';
 import PageRender from './myLearning/pageRerendering';
 import ComplexState from './myLearning/ComplexState';
+import EventHandle from './myLearning/EventHandling';
 
 const Header = (props) => {
     console.log('from header', props)
@@ -62,6 +63,7 @@ const App = () => {
             <Hello name="Poonam" age="28" gender="female" />
             <PageRender></PageRender>
             <ComplexState></ComplexState>
+            <EventHandle></EventHandle>
 
         </div>
     )
