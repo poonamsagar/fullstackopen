@@ -6,6 +6,9 @@ import ReactDOM from 'react-dom'
 const Button = ({ text, onClick }) => <button onClick={onClick} >{text}</button>
 const Heading = ({ text }) => <h1>{text}</h1>
 
+const Statistic = ({ text, value }) => {
+    return (<div>{text} {value}</div>)
+}
 const Statistics = ({ good, neutral, bad }) => {
 
     const totalFeedback = good + neutral + bad;
@@ -18,12 +21,12 @@ const Statistics = ({ good, neutral, bad }) => {
     else {
         return (
             <>
-                <div>good {good}</div>
-                <div>neutral {neutral}</div>
-                <div>bad {bad}</div>
-                <div>all  {totalFeedback}</div>
-                <div>average {averageFeedback}</div>
-                <div>positive {positivePercentage} %</div>
+                <Statistic text="good" value={good} />
+                <Statistic text="neutral" value={neutral} />
+                <Statistic text="bad" value={bad} />
+                <Statistic text="all" value={totalFeedback} />
+                <Statistic text="average" value={averageFeedback} />
+                <Statistic text="positive" value={positivePercentage + " %"} />
             </>
         )
     }
