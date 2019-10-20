@@ -5,11 +5,17 @@ const Header = ({ text }) => {
   return <h1>{text}</h1>;
 };
 
+const Total = ({ parts }) => {
+  let sumOfExercises = 0;
+  parts.map(item => (sumOfExercises += item.exercises));
+  return <h3>total of {sumOfExercises} exercises</h3>;
+};
+
 const Part = ({ name, exercises }) => {
   return (
-    <div>
+    <p>
       {name} {exercises}
-    </div>
+    </p>
   );
 };
 const Content = ({ parts }) => {
@@ -26,6 +32,7 @@ const Course = ({ course }) => {
     <>
       <Header text={course.name}></Header>
       <Content parts={course.parts}></Content>
+      <Total parts={course.parts} />
     </>
   );
 };
@@ -48,14 +55,15 @@ const App = () => {
         name: "State of a component",
         exercises: 14,
         id: 3
+      },
+      {
+        name: "Redux",
+        exercises: 11,
+        id: 4
       }
     ]
   };
 
-  return (
-    <div>
-      <Course course={course} />
-    </div>
-  );
+  return <Course course={course} />;
 };
 ReactDOM.render(<App />, document.getElementById("root"));
