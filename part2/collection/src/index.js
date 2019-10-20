@@ -6,8 +6,8 @@ const Header = ({ text }) => {
 };
 
 const Total = ({ parts }) => {
-  let sumOfExercises = 0;
-  parts.map(item => (sumOfExercises += item.exercises));
+  const reducer = (acc, cur) => acc + cur.exercises;
+  const sumOfExercises = parts.reduce(reducer, 0);
   return <h3>total of {sumOfExercises} exercises</h3>;
 };
 
