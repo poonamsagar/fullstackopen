@@ -101,7 +101,7 @@ const App = () => {
       <PageRender></PageRender>
       <ComplexState></ComplexState>
       <EventHandle></EventHandle>
-      <Notes notes={data}></Notes>
+      <Notes notesList={data}></Notes>
     </div>
   );
 };
