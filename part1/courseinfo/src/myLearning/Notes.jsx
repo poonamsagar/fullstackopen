@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Note = ({ note }) => <li>{note.content} </li>;
 
-const Notes = ({ notesList }) => {
-  const [notes, setNotes] = useState(notesList);
+const Notes = () => {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(true);
 
@@ -29,6 +30,16 @@ const Notes = ({ notesList }) => {
   const handleChangeEvent = event => {
     setNewNote(event.target.value);
   };
+  const hook = () => {
+    console.log("effect");
+    axios.get("http://localhost:3001/notes").then(response => {
+      console.log("promise fulfilled");
+      setNotes(response.data);
+    });
+  };
+
+  useEffect(hook, []);
+  console.log("render", notes.length, "notes");
   return (
     <>
       <h1>Notes</h1>

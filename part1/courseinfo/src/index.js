@@ -7,11 +7,9 @@ import EventHandle from "./myLearning/EventHandling";
 import Notes from "./myLearning/Notes";
 
 const Header = props => {
-  console.log("from header", props);
   return <h1>{props.course}</h1>;
 };
 const Part = props => {
-  console.log("from part", props);
   return (
     <p>
       {props.name} {props.exercises}
@@ -19,7 +17,6 @@ const Part = props => {
   );
 };
 const Content = props => {
-  console.log("from content", props);
   return (
     <>
       <Part name={props.parts[0].name} exercises={props.parts[0].exercises} />
@@ -101,7 +98,7 @@ const App = () => {
       <PageRender></PageRender>
       <ComplexState></ComplexState>
       <EventHandle></EventHandle>
-      <Notes notesList={data}></Notes>
+      <Notes></Notes>
     </div>
   );
 };
