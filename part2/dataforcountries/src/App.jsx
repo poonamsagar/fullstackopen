@@ -4,6 +4,22 @@ import Prompt from "./components/Prompt";
 import CountryData from "./components/CountryData";
 import CountryFilter from "./components/CountryFilter";
 
+const CountryWithView = ({ country }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const toggleShowDetails = () => setShowDetails(!showDetails);
+  return (
+    <>
+      <div>
+        {country.name}
+        <button onClick={toggleShowDetails}>
+          {!showDetails ? "show" : "hide"}
+        </button>
+        {showDetails ? <CountryData country={country}></CountryData> : null}
+      </div>
+    </>
+  );
+};
+
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,7 +37,6 @@ const App = () => {
   const filterChangeHandler = event => {
     setSearchTerm(event.target.value);
   };
-
   const displayResult = () => {
     if (filterResult.length > 10) {
       return <Prompt searchTerm={searchTerm} />;
@@ -29,7 +44,7 @@ const App = () => {
       return <CountryData country={filterResult[0]} />;
     } else {
       return React.Children.toArray(
-        filterResult.map(country => <div>{country.name}</div>)
+        filterResult.map(country => <CountryWithView country={country} />)
       );
     }
   };
