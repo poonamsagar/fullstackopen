@@ -3,22 +3,7 @@ import axios from "axios";
 import Prompt from "./components/Prompt";
 import CountryData from "./components/CountryData";
 import CountryFilter from "./components/CountryFilter";
-
-const CountryWithView = ({ country }) => {
-  const [showDetails, setShowDetails] = useState(false);
-  const toggleShowDetails = () => setShowDetails(!showDetails);
-  return (
-    <>
-      <div>
-        {country.name}
-        <button onClick={toggleShowDetails}>
-          {!showDetails ? "show" : "hide"}
-        </button>
-        {showDetails ? <CountryData country={country}></CountryData> : null}
-      </div>
-    </>
-  );
-};
+import CountryWithView from "./components/CountryWithView";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
