@@ -1,58 +1,85 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { getAll, create, update } from '../services/notes';
 
-const Note = ({ note }) => <li>{note.content} </li>;
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important ? 'make not important' : 'make important';
+  return (
+    <li>
+      {note.content}
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  );
+};
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("a new note...");
+  const [newNote, setNewNote] = useState('a new note...');
   const [showAll, setShowAll] = useState(true);
 
-  const notesToShow = showAll ? notes : notes.filter(note => note.important);
+  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
+  const toggleImportanceOf = (id) => {
+    const note = notes.find((n) => n.id === id);
+    const changedNote = { ...note, important: !note.important };
+
+    update(id, changedNote)
+      .then((returnedNote) => {
+        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)));
+      })
+      .catch((error) => {
+        alert(`the note '${note.content}' was already deleted from the server`);
+        setNotes(notes.filter((n) => n.id !== id));
+      });
+  };
   const rows = () =>
-    notesToShow.map(item => <Note key={item.id} note={item} />);
+    notesToShow.map((note) => (
+      <Note
+        key={note.id}
+        note={note}
+        toggleImportance={() => toggleImportanceOf(note.id)}
+      />
+    ));
   notes.map((note, index) => {
     return note.content + index;
   });
 
-  const addNote = event => {
+  const addNote = (event) => {
     event.preventDefault();
     const noteObject = {
       content: newNote,
-      id: notes.length + 1,
       date: new Date().toISOString(),
-      important: Math.random() > 0.5
+      important: Math.random() > 0.5,
     };
-    setNotes(notes.concat(noteObject));
-    setNewNote("");
+    create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote));
+      setNewNote('');
+    });
   };
-  const handleChangeEvent = event => {
+  const handleChangeEvent = (event) => {
     setNewNote(event.target.value);
   };
   const hook = () => {
-    console.log("effect");
-    axios.get("http://localhost:3001/notes").then(response => {
-      console.log("promise fulfilled");
-      setNotes(response.data);
+    getAll().then((initialNotes) => {
+      console.log('promise fulfilled ');
+      setNotes(initialNotes);
     });
   };
 
   useEffect(hook, []);
-  console.log("render", notes.length, "notes");
+  console.log('render', notes.length, 'notes');
   return (
     <>
       <h1>Notes</h1>
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? "important" : "all"}
+          show {showAll ? 'important' : 'all'}
         </button>
       </div>
       <ul>{rows()}</ul>
       <form onSubmit={addNote}>
         <input value={newNote} onChange={handleChangeEvent} />
 
-        <button type="submit">save</button>
+        <button type='submit'>save</button>
       </form>
     </>
   );
