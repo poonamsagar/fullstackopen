@@ -3,12 +3,15 @@ import Filter from './components/Filter';
 import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
 import { create, getAll, remove, update } from './services/persons';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState(null);
   const filterResult = !searchTerm
     ? persons
     : persons.filter((person) =>
@@ -29,6 +32,10 @@ const App = () => {
           const updatePerson = { ...person, number: newNumber };
           update(updatePerson)
             .then((returnedPerson) => {
+              setMessage(`Updated ${returnedPerson.name}'s number`);
+              setTimeout(() => {
+                setMessage(null);
+              }, 5000);
               setPersons(
                 persons.map((person) =>
                   person.id !== updatePerson.id ? person : returnedPerson
@@ -38,11 +45,25 @@ const App = () => {
               setNewNumber('');
             })
 
-            .catch((error) => console.log('An error occured', error));
+            .catch((error) => {
+              setMessage(
+                `Information of ${updatePerson.name} has already been removed from server`
+              );
+              setMessageType('error');
+              setTimeout(() => {
+                setMessage(null);
+                setMessageType(null);
+              }, 5000);
+              console.log(error);
+            });
         }
       } else {
         create(newPerson)
           .then((returnedPerson) => {
+            setMessage(`Added ${returnedPerson.name}`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
             setPersons(persons.concat(returnedPerson));
             setNewName('');
             setNewNumber('');
@@ -81,6 +102,7 @@ const App = () => {
   return (
     <>
       <h2>Phonebook</h2>
+      <Notification message={message} type={messageType} />
       <Filter
         searchTerm={searchTerm}
         filterChangeHandler={filterChangeHandler}
