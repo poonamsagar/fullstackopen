@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
-import { create, getAll, remove } from './services/persons';
+import { create, getAll, remove, update } from './services/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -19,14 +19,35 @@ const App = () => {
     event.preventDefault();
     if (newName.length) {
       const newPerson = { name: newName, number: newNumber };
-      if (persons.some((person) => person.name === newName)) {
-        alert(`${newName} is already added to the phonebook`);
+      const person = persons.find((person) => person.name === newName);
+      if (person) {
+        if (
+          window.confirm(
+            `${newName} is already added to phonebook, replace the old number with a new one?`
+          )
+        ) {
+          const updatePerson = { ...person, number: newNumber };
+          update(updatePerson)
+            .then((returnedPerson) => {
+              setPersons(
+                persons.map((person) =>
+                  person.id !== updatePerson.id ? person : returnedPerson
+                )
+              );
+              setNewName('');
+              setNewNumber('');
+            })
+
+            .catch((error) => console.log('An error occured', error));
+        }
       } else {
-        create(newPerson).then((returnedPerson) => {
-          setPersons(persons.concat(returnedPerson));
-          setNewName('');
-          setNewNumber('');
-        });
+        create(newPerson)
+          .then((returnedPerson) => {
+            setPersons(persons.concat(returnedPerson));
+            setNewName('');
+            setNewNumber('');
+          })
+          .catch((error) => console.log('An error occured', error));
       }
     }
   };
@@ -34,8 +55,11 @@ const App = () => {
   const deletePerson = (id) => {
     const person = persons.find((person) => person.id === id);
     if (window.confirm(`Delete ${person.name} ?`)) {
-      remove(id);
-      setPersons(persons.filter((person) => person.id !== id));
+      remove(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+        })
+        .catch((error) => console.log('An error occured', error));
     }
   };
   const nameChangeHandler = (event) => {
