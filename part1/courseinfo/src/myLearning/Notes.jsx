@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getAll, create, update } from '../services/notes';
+import Notification from './Notification';
+import Footer from './Footer';
 
 const Note = ({ note, toggleImportance }) => {
   const label = note.important ? 'make not important' : 'make important';
   return (
-    <li>
+    <li className='note'>
       {note.content}
       <button onClick={toggleImportance}>{label}</button>
     </li>
@@ -13,8 +15,10 @@ const Note = ({ note, toggleImportance }) => {
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
+
   const [newNote, setNewNote] = useState('a new note...');
   const [showAll, setShowAll] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -27,7 +31,13 @@ const Notes = () => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)));
       })
       .catch((error) => {
-        alert(`the note '${note.content}' was already deleted from the server`);
+        setErrorMessage(
+          `Note '${note.content}' was already removed from server`
+        );
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+
         setNotes(notes.filter((n) => n.id !== id));
       });
   };
@@ -70,6 +80,7 @@ const Notes = () => {
   return (
     <>
       <h1>Notes</h1>
+      <Notification message={errorMessage} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all'}
@@ -81,6 +92,7 @@ const Notes = () => {
 
         <button type='submit'>save</button>
       </form>
+      <Footer />
     </>
   );
 };
