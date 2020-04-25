@@ -24,7 +24,7 @@
 // //t[0]=1
 // //t[1]=-1
 // //t[2]=3
-// console.log(t[1])   //1 
+// console.log(t[1])   //1
 // /*
 // t.forEach(value => {
 //   console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
@@ -50,16 +50,16 @@
 
 //Objects
 const obj1 = {
-    name: 'poonam',
-    age: 25,
-    otherObject: {
-        partner: 'pankaj',
-        age: 24,
-        deepObject: {
-            greeting: 'hello'
-        }
+  name: "poonam",
+  age: 25,
+  otherObject: {
+    partner: "pankaj",
+    age: 24,
+    deepObject: {
+      greeting: "hello",
     },
-    'wierd property': 'I am wired'
+  },
+  "wierd property": "I am wired",
 };
 //dot notation
 // console.log(obj1.name);
@@ -146,7 +146,12 @@ console.log(myArray);*/
 // const pankaj = new Person('Panakj', 5);
 // pankaj.greet();
 
-poonamArray = ['wow', () => console.log('I am a method'), { a: 1, b: 2 }, 'done'];
+// poonamArray = [
+//   "wow",
+//   () => console.log("I am a method"),
+//   { a: 1, b: 2 },
+//   "done",
+// ];
 // const firstElement = poonamArray[0];
 // const secondElement = poonamArray[1];
 // const thirdElement = poonamArray[2];
@@ -159,10 +164,149 @@ poonamArray = ['wow', () => console.log('I am a method'), { a: 1, b: 2 }, 'done'
 // newArray.push('newVale');
 // newArray[1] = 'I am string now';
 
-
 // console.log('new Array', newArray)
 // console.log('originl array', poonamArray)
-const obj = { a: 'hello', b: 'bye' };
-const newObj = { ...obj, a: 'changeValue' }
+//const obj = { a: 'hello', b: 'bye' };
+//const newObj = { ...obj, a: 'changeValue' }
 //console.log(obj);
-console.log(newObj)
+// //console.log(newObj)
+
+// const someArray = [
+//   { id: 1, content: "some content", important: true, rank: 2 },
+//   { id: 2, content: "some content", important: false, rank: 3 },
+//   { id: 3, content: "some content", important: true, rank: 2 },
+//   { id: 4, content: "some content", important: false, rank: 5 },
+// ];
+// const numbers = [2, 3, 4, 5, 6, 7, 9]; //use filter method to filter all odd numbers
+// const isEven = (num) => {
+//   return num % 2 === 0;
+// };
+// const evenNumber = numbers.filter(isEven);
+
+// const isRank2 = (obj) => {
+//   return obj.rank === 2;
+// };
+// const numbersWithRank2 = someArray.filter(isRank2);
+// //console.log(numbersWithRank2);
+
+// const isImportant = (obj) => {
+//   return obj.important === true;
+// };
+// const importantNotes = someArray.filter(isImportant);
+// console.log(isImportant(importantNotes));
+
+const fruits = [
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+  "apple",
+  "oranges",
+  "mango",
+  "banana",
+  "pineapple",
+  "orange",
+]; // filter out all oranges and mangoes from this array
+// const isOrangeOrMango = (fruit) => {
+//   return fruit === "orange" || fruit === "mango";
+// };
+//const fruitsGarden = fruits.filter(isOrangeOrMango);
+//const someNumbers = [2, 3, 45, 67, 89, 98, 76, 54, 67, 4]; //use .map method to double all the numbers in array
+//console.log(fruitsGarden.length);
+// const double = (num) => {
+//   return 2 * num;
+// };
+// const doubleNumbers = someNumbers.map(double);
+const addSurname = (fruit) => {
+  return `${fruit} sagar`;
+};
+const fruitsWithSurname = fruits.map(addSurname);
+console.log(fruitsWithSurname);
+const students = [
+  { name: "poonam", marks: 80, id: 1 },
+  { name: "pankaj", marks: 30, id: 2 },
+  { name: "hero", marks: 39, id: 3 },
+  { name: "zero", marks: 41, id: 4 },
+  { name: "rahul", marks: 90, id: 5 },
+  { name: "gandhi", marks: 56, id: 6 },
+];
+const someObj = { person: "poonam", age: 90 }; // if person's age is greater than 65 then he/she is Senior citizen
+const isSeniorCitizen = (person) => {
+  if (person.age > 65) {
+    person.seniorCitizen = true;
+  } else {
+    person.seniorCitizen = false;
+  }
+  return person;
+};
+//console.log(isSeniorCitizen(someObj));
+//console.log("some obj", someObj);
+const isResultDeclare = (student) => {
+  //   if (student.marks >= 40) {
+  //     student.result = "pass";
+  //   } else {
+  //     student.result = "fail";
+  //   }
+  //   return student;
+  let result;
+  if (student.marks >= 40) {
+    result = "pass";
+  } else {
+    result = "fail";
+  }
+  return { ...student, result };
+};
+
+const resultOfStudent = students.map(isResultDeclare);
+console.log("students ", students);
+console.log("resultOfStudent ", resultOfStudent);
